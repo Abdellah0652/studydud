@@ -1,8 +1,9 @@
-from importlib.resources import path
+from django.urls import path
 
 from base import views
-from .views import home
+
 
 urlpatterns = [
-    path('', views.home),
+    path('', views.home, name="home"),
+    path('room/<str:pk>/', views.room, name="room"),
 ]
