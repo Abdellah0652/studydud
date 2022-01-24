@@ -1,10 +1,18 @@
 
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="{% url 'home'%}">
-    Home
+  <a  href="/">
+    <h3>LOGO</h3>
   </a>
-    <a class="navbar-brand" href="/">
-    room
-  </a>
-</nav>
+  <form action="{% url 'home'%}" METHOD="GET">
+     {%csrf_token%}
+
+    <input type="text" name="q" placeholder="search rooms .... ">
+
+  </form>
+  {% if request.user.is_authenticated%}
+  <p> Hello {{user.username}}</p>
+  <a href="{% url 'logout-user'%}"> Logout </a>
+  {%else%}
+  <a href="{% url 'login'%}"> Login </a>
+  {%endif%}
+  <hr>
 
