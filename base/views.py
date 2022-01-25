@@ -59,6 +59,17 @@ def registerPage(request):
     return render(request, 'login_register.html', {'form': form})
 
 
+def topicsPage(request):
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    topics = Topic.objects.filter(name__icontains=q)
+    return render(request, 'topics.html', {'topics': topics})
+
+
+def activityPage(request):
+    room_messages = Message.objects.all()
+    return render(request, 'activity.html', {'room_messages': room_messages})
+
+
 def room(request, pk):
     room = Room.objects.get(id=pk)
     room_message = room.message_set.all()
@@ -113,6 +124,7 @@ def userProfile(request, pk):
 
     }
     return render(request, 'profile.html', context)
+
 
 @login_required(login_url='login')
 def updateUser(request):
